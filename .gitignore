@@ -1,0 +1,30 @@
+# Visual Studio Cache
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+obj/
+
+# Rider
+.idea/
+.vs/
+.idea/
+
+
+# Auto-generated files
+*.csproj.user
+*.csproj.vspscc
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# User-specific files
+*.userosscache
+*.sln.docstates
