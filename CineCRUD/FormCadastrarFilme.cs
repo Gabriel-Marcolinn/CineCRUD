@@ -12,9 +12,14 @@ namespace CineCRUD
 {
     public partial class FormCadastrarFilme : Form
     {
-        public FormCadastrarFilme()
+        #region Variáveis privadas
+        private XMLController controle;
+        #endregion
+
+        public FormCadastrarFilme(XMLController controle)
         {
             InitializeComponent();
+            this.controle = controle;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -51,6 +56,27 @@ namespace CineCRUD
                     MessageBox.Show(ex.Message);
                 }
             }
+            #endregion
+
+            #region Salva dados
+            try
+            {
+                string titulo = inputTitulo.Text.ToString();
+                string diretor = inputDiretor.Text.ToString();
+                string genero = inputGenero.Text.ToString();
+                string lancamento = inputLancamento.Text.ToString();
+                string duracao = inputDuracao.Text.ToString();
+                string avaliacao = inputAvaliacao.Text.ToString();
+
+                controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+                this.Close();
+            }
+            catch(Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
+            
+
             #endregion
         }
 

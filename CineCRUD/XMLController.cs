@@ -11,9 +11,27 @@ namespace CineCRUD
     public class XMLController
     {
         #region Variáveis Privadas
-        private DataTable dtDados = new DataTable();
-
+        private DataTable dtDados;
         #endregion
+
+        public DataTable GetDataTable()
+        {
+            return dtDados;
+        }
+        public XMLController() {
+            InicializarDataTable();
+        }
+
+        private void InicializarDataTable()
+        {
+            dtDados = new DataTable();
+            dtDados.Columns.Add("Titulo");
+            dtDados.Columns.Add("Diretor");
+            dtDados.Columns.Add("Genero");
+            dtDados.Columns.Add("Lancamento");
+            dtDados.Columns.Add("Duracao");
+            dtDados.Columns.Add("Avaliacao");
+        }
 
         public void InicializarForm()
         {
@@ -30,7 +48,6 @@ namespace CineCRUD
                     return null;
                 }
 
-                dtDados.Clear();
                     DataSet tempDataSet = new DataSet();
                     tempDataSet.ReadXml(arqXML);
                     dtDados = tempDataSet.Tables[0].Copy();
@@ -42,6 +59,21 @@ namespace CineCRUD
                 MessageBox.Show("Erro ao carregar XML: " + ex.Message);
                 return null;
             }
+        }
+    
+        public void adicionarFilme(string titulo, string diretor, string genero, string lancamento, string duracao, string avaliacao)
+        {
+            if (dtDados.Rows.Count == 0) {
+                InicializarDataTable();
+            }
+            DataRow novalinha = dtDados.NewRow();
+            novalinha["Titulo"] = titulo;
+            novalinha["Diretor"] = diretor;
+            novalinha["Genero"] = genero;
+            novalinha["Lancamento"] = lancamento;
+            novalinha["Duracao"] = duracao;
+            novalinha["Avaliacao"] = avaliacao;
+            dtDados.Rows.Add(novalinha);
         }
     }
 }

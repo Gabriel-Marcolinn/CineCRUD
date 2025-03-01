@@ -14,25 +14,36 @@ namespace CineCRUD
     {
         #region Variáveis privadas
         private XMLController controle = new XMLController();
-        private FormCadastrarFilme cadastraFilme = new FormCadastrarFilme();
         #endregion
 
         public FormFilmes()
         {
             InitializeComponent();
+            listaFilmes.DataSource = controle.GetDataTable();
         }
 
         private void carregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(abreArqDialog.ShowDialog() == DialogResult.OK)
             {
-                listaFilmes.DataSource = controle.CarregarXML(abreArqDialog.FileName);
+                DataTable listaDados = controle.CarregarXML(abreArqDialog.FileName);
+                listaFilmes.DataSource = listaDados;
             }
         }
 
         private void novoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FormCadastrarFilme cadastraFilme = new FormCadastrarFilme(controle);
             cadastraFilme.ShowDialog();
+
+            // Atualiza a lista após fechar o cadastro
+            listaFilmes.DataSource = null;
+            listaFilmes.DataSource = controle.GetDataTable();
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
