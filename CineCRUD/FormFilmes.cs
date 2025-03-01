@@ -14,6 +14,7 @@ namespace CineCRUD
     {
         #region Variáveis privadas
         private XMLController controle = new XMLController();
+        private FormCadastrarFilme cadastraFilme = new FormCadastrarFilme();
         #endregion
 
         public FormFilmes()
@@ -27,6 +28,11 @@ namespace CineCRUD
             {
                 listaFilmes.DataSource = controle.CarregarXML(abreArqDialog.FileName);
             }
+        }
+
+        private void novoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cadastraFilme.ShowDialog();
         }
     }
 }
