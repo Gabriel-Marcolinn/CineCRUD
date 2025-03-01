@@ -37,7 +37,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.inputTitulo = new System.Windows.Forms.TextBox();
             this.inputDiretor = new System.Windows.Forms.TextBox();
-            this.inputGênero = new System.Windows.Forms.TextBox();
+            this.inputGenero = new System.Windows.Forms.TextBox();
             this.inputLancamento = new System.Windows.Forms.TextBox();
             this.inputDuracao = new System.Windows.Forms.TextBox();
             this.inputAvaliacao = new System.Windows.Forms.TextBox();
@@ -112,9 +112,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(22, 314);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 20);
+            this.label7.Size = new System.Drawing.Size(144, 20);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Avaliação:";
+            this.label7.Text = "Avaliação (1-10):";
             // 
             // inputTitulo
             // 
@@ -130,20 +130,23 @@
             this.inputDiretor.Size = new System.Drawing.Size(100, 20);
             this.inputDiretor.TabIndex = 8;
             // 
-            // inputGênero
+            // inputGenero
             // 
-            this.inputGênero.Location = new System.Drawing.Point(96, 161);
-            this.inputGênero.Name = "inputGênero";
-            this.inputGênero.Size = new System.Drawing.Size(100, 20);
-            this.inputGênero.TabIndex = 9;
+            this.inputGenero.Location = new System.Drawing.Point(96, 161);
+            this.inputGenero.Name = "inputGenero";
+            this.inputGenero.Size = new System.Drawing.Size(100, 20);
+            this.inputGenero.TabIndex = 9;
             // 
             // inputLancamento
             // 
+            this.inputLancamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputLancamento.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.inputLancamento.Location = new System.Drawing.Point(216, 210);
             this.inputLancamento.MaxLength = 4;
             this.inputLancamento.Name = "inputLancamento";
-            this.inputLancamento.Size = new System.Drawing.Size(100, 20);
+            this.inputLancamento.Size = new System.Drawing.Size(100, 22);
             this.inputLancamento.TabIndex = 10;
+            this.inputLancamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputLancamento_KeyPress);
             // 
             // inputDuracao
             // 
@@ -151,14 +154,16 @@
             this.inputDuracao.Name = "inputDuracao";
             this.inputDuracao.Size = new System.Drawing.Size(100, 20);
             this.inputDuracao.TabIndex = 11;
+            this.inputDuracao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputDuracao_KeyPress);
             // 
             // inputAvaliacao
             // 
-            this.inputAvaliacao.Location = new System.Drawing.Point(119, 314);
-            this.inputAvaliacao.MaxLength = 1;
+            this.inputAvaliacao.Location = new System.Drawing.Point(216, 314);
+            this.inputAvaliacao.MaxLength = 2;
             this.inputAvaliacao.Name = "inputAvaliacao";
             this.inputAvaliacao.Size = new System.Drawing.Size(100, 20);
             this.inputAvaliacao.TabIndex = 12;
+            this.inputAvaliacao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputAvaliacao_KeyPress);
             // 
             // btnSalvar
             // 
@@ -171,6 +176,7 @@
             this.btnSalvar.TabIndex = 13;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnCancelar
             // 
@@ -195,7 +201,7 @@
             this.Controls.Add(this.inputAvaliacao);
             this.Controls.Add(this.inputDuracao);
             this.Controls.Add(this.inputLancamento);
-            this.Controls.Add(this.inputGênero);
+            this.Controls.Add(this.inputGenero);
             this.Controls.Add(this.inputDiretor);
             this.Controls.Add(this.inputTitulo);
             this.Controls.Add(this.label7);
@@ -223,7 +229,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox inputTitulo;
         private System.Windows.Forms.TextBox inputDiretor;
-        private System.Windows.Forms.TextBox inputGênero;
+        private System.Windows.Forms.TextBox inputGenero;
         private System.Windows.Forms.TextBox inputLancamento;
         private System.Windows.Forms.TextBox inputDuracao;
         private System.Windows.Forms.TextBox inputAvaliacao;
