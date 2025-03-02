@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace CineCRUD
 {
@@ -74,6 +75,53 @@ namespace CineCRUD
             novalinha["Duracao"] = duracao;
             novalinha["Avaliacao"] = avaliacao;
             dtDados.Rows.Add(novalinha);
+        }
+
+        public void salvarXML(string caminhoArquivo)
+        {
+            if (!caminhoArquivo.EndsWith(".xml"))
+            {
+                caminhoArquivo += ".xml";
+            }
+            try
+            {
+                if (dtDados == null || dtDados.Rows.Count == 0)
+                {
+                    MessageBox.Show("Nenhum dado para salvar", "Atenção!", MessageBoxButtons.OK);
+                    return;
+                }
+
+                XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"));
+                XElement raiz = new XElement("Filmes");
+
+                foreach(DataRow row in dtDados.Rows)
+                {
+                    XElement filme = new XElement("Filme",
+                        new XElement("Titulo", row["Titulo".ToString()]),
+                        new XElement("Diretor", row["Diretor".ToString()]),
+                        new XElement("Genero", row["Genero".ToString()]),
+                        new XElement("Lancamento", row["Lancamento".ToString()]),
+                        new XElement("Duracao", row["Duracao".ToString()]),
+                        new XElement("Avaliacao", row["Avaliacao".ToString()])
+                    );
+                    raiz.Add(filme);
+                }
+                //adiciona todos os elementos no arquivo
+                doc.Add(raiz);
+
+                doc.Save(caminhoArquivo);
+                /*
+                DataSet dataSet = new DataSet();
+                dataSet.Tables.Add(dtDados.Copy());
+                dataSet.WriteXml(caminhoArquivo, XmlWriteMode.WriteSchema);
+                */
+                MessageBox.Show("Arquivo XML salvo com sucesso!", "Atenção!", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao salvar XML: " + ex.Message);
+            }
+
         }
     }
 }

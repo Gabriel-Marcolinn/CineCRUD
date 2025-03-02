@@ -35,6 +35,7 @@
             this.salvarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abreArqDialog = new System.Windows.Forms.OpenFileDialog();
+            this.salvaArquivoDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.listaFilmes)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +81,7 @@
             this.salvarToolStripMenuItem.Name = "salvarToolStripMenuItem";
             this.salvarToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.salvarToolStripMenuItem.Text = "Salvar";
+            this.salvarToolStripMenuItem.Click += new System.EventHandler(this.salvarToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
@@ -92,6 +94,10 @@
             // 
             this.abreArqDialog.FileName = "openFileDialog1";
             this.abreArqDialog.Filter = "Arquivos XML|*xml";
+            // 
+            // salvaArquivoDialog
+            // 
+            this.salvaArquivoDialog.Filter = "Arquivos XML|*xml";
             // 
             // FormFilmes
             // 
@@ -120,6 +126,7 @@
         private System.Windows.Forms.ToolStripMenuItem salvarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog abreArqDialog;
+        private System.Windows.Forms.SaveFileDialog salvaArquivoDialog;
     }
 }
 

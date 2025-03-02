@@ -45,5 +45,16 @@ namespace CineCRUD
         {
             this.Close();
         }
+
+        private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja salvar as alterações feitas?", "Atenção", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+                {
+                    controle.salvarXML(salvaArquivoDialog.FileName);
+                }
+            }
+        }  
     }
 }
