@@ -55,6 +55,6 @@ namespace CineCRUD
                     controle.salvarXML(salvaArquivoDialog.FileName);
                 }
             }
-        }  
+        }
     }
 }

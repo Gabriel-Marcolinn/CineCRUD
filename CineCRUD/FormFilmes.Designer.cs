@@ -42,10 +42,15 @@
             // 
             // listaFilmes
             // 
+            this.listaFilmes.AllowUserToAddRows = false;
+            this.listaFilmes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.listaFilmes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.listaFilmes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listaFilmes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaFilmes.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.listaFilmes.Location = new System.Drawing.Point(0, 24);
             this.listaFilmes.Name = "listaFilmes";
+            this.listaFilmes.ShowEditingIcon = false;
             this.listaFilmes.Size = new System.Drawing.Size(800, 426);
             this.listaFilmes.TabIndex = 0;
             // 
