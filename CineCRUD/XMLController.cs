@@ -34,11 +34,6 @@ namespace CineCRUD
             dtDados.Columns.Add("Avaliacao");
         }
 
-        public void InicializarForm()
-        {
-            FormFilmes form = new FormFilmes();
-        }
-
         public DataTable CarregarXML(string arqXML)
         {
             try
