@@ -110,11 +110,7 @@ namespace CineCRUD
                 doc.Add(raiz);
 
                 doc.Save(caminhoArquivo);
-                /*
-                DataSet dataSet = new DataSet();
-                dataSet.Tables.Add(dtDados.Copy());
-                dataSet.WriteXml(caminhoArquivo, XmlWriteMode.WriteSchema);
-                */
+
                 MessageBox.Show("Arquivo XML salvo com sucesso!", "Atenção!", MessageBoxButtons.OK);
             }
             catch (Exception ex)
