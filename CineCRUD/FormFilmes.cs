@@ -77,10 +77,7 @@ namespace CineCRUD
                 DialogResult resposta = MessageBox.Show("O Arquivo foi alterado. Deseja salvar as alterações feitas?", "Atenção", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (resposta == DialogResult.Yes)
                 {
-                    if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        controle.salvarXML(salvaArquivoDialog.FileName);
-                    }
+                    comoSalvar(sCaminhoArquivo);
                 }
                 else if (resposta == DialogResult.Cancel)
                 {
@@ -92,14 +89,13 @@ namespace CineCRUD
         //Função própria que valida se o arquivo já existe (foi carregado) ou se precisa do salvaArquivoDialog, para criar um novo
         private string comoSalvar(string sCaminhoArquivo)
         {
-            if (sCaminhoArquivo == "")
+            if (sCaminhoArquivo == "" && salvaArquivoDialog.ShowDialog() == DialogResult.OK)
             {
-                if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
-                {
-                    sCaminhoArquivo = salvaArquivoDialog.FileName;
-                }
+                sCaminhoArquivo = salvaArquivoDialog.FileName;
             }
             controle.salvarXML(sCaminhoArquivo);
+            bAlterado = false;
+
             return sCaminhoArquivo;
         }
     }
