@@ -42,9 +42,17 @@ namespace CineCRUD
                     int duracao = Convert.ToInt32(inputDuracao.Text);
                     int avaliacao = Convert.ToInt32(inputAvaliacao.Text);
 
-                    if ((lancamento < 1900 || lancamento > DateTime.Now.Year) || (duracao <= 0 || duracao > 10000) || (avaliacao < 1 || avaliacao > 10))
+                    if (lancamento < 1895 || lancamento > DateTime.Now.Year)
                     {
-                        throw new ArgumentException("Os dados informados de lançamento, ano ou duração são inválidos!");
+                        throw new ArgumentException("O ano informado é inválido!");
+                    }
+                    if (duracao <= 0 || duracao > 51420)
+                    {
+                        throw new ArgumentException("A duração em minutos informada é inválida!");
+                    }
+                    if (avaliacao < 1 || avaliacao > 10)
+                    {
+                        throw new ArgumentException("A Avaliação informada é inválida!");
                     }
 
                     #region Salva dados
@@ -66,7 +74,7 @@ namespace CineCRUD
                 }
                 catch (ArgumentException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {

@@ -152,6 +152,7 @@
             // inputDuracao
             // 
             this.inputDuracao.Location = new System.Drawing.Point(216, 266);
+            this.inputDuracao.MaxLength = 5;
             this.inputDuracao.Name = "inputDuracao";
             this.inputDuracao.Size = new System.Drawing.Size(100, 20);
             this.inputDuracao.TabIndex = 11;
