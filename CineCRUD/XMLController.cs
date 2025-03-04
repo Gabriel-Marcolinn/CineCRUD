@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,9 +52,14 @@ namespace CineCRUD
 
                     return dtDados;
             }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show($"Erro ao carregar XML: {ex.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar XML: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro desconhecido: {ex.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -109,11 +115,14 @@ namespace CineCRUD
 
                 MessageBox.Show("Arquivo XML salvo com sucesso!", "Atenção!", MessageBoxButtons.OK);
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show($"Erro ao salvar XML: Acesso negado. {ex.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar XML: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao salvar XML: {ex.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }

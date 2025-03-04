@@ -31,7 +31,7 @@ namespace CineCRUD
                 DataTable listaDados = controle.CarregarXML(abreArqDialog.FileName);
                 listaFilmes.DataSource = listaDados;
 
-                sCaminhoArquivo = abreArqDialog.FileName.ToString();
+                sCaminhoArquivo = abreArqDialog.FileName;
             }
         }
 
@@ -41,7 +41,6 @@ namespace CineCRUD
             cadastraFilme.ShowDialog();
 
             // Atualiza a lista após fechar o cadastro
-            listaFilmes.DataSource = null;
             listaFilmes.DataSource = controle.GetDataTable();
 
             if (controle.GetDataTable().Rows.Count > 0)
