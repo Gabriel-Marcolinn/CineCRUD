@@ -60,7 +60,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XMLController.cs" />
+    <Compile Include="Controladores\XMLController.cs" />
     <EmbeddedResource Include="FormCadastrarFilme.resx">
       <DependentUpon>FormCadastrarFilme.cs</DependentUpon>
     </EmbeddedResource>
