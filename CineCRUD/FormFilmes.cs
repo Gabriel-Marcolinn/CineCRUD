@@ -14,7 +14,7 @@ namespace CineCRUD
     {
         #region Variáveis privadas
         private XMLController controle = new XMLController();
-        private bool bAlterado;
+        private bool bAlterado = false;
         #endregion
 
         public FormFilmes()
@@ -29,11 +29,6 @@ namespace CineCRUD
             {
                 DataTable listaDados = controle.CarregarXML(abreArqDialog.FileName);
                 listaFilmes.DataSource = listaDados;
-
-                if (controle.GetDataTable().Rows.Count > 0)
-                {
-                    bAlterado = true;
-                }
             }
         }
 
@@ -52,26 +47,41 @@ namespace CineCRUD
             }
         }
 
-        private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Deseja salvar as alterações feitas?", "Atenção", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
-                {
-                    controle.salvarXML(salvaArquivoDialog.FileName);
-                }
-            }
-        }
-
         private void listaFilmes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             bAlterado = true;
         }
 
+        private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+            {
+                controle.salvarXML(salvaArquivoDialog.FileName);
+            }
+        }
+
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             this.Close();
+        }
+
+        private void FormFilmes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (bAlterado == true)
+            {
+                DialogResult resposta = MessageBox.Show("O Arquivo foi alterado. Deseja salvar as alterações feitas?", "Atenção", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (resposta == DialogResult.Yes)
+                {
+                    if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        controle.salvarXML(salvaArquivoDialog.FileName);
+                    }
+                }
+                else if (resposta == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

@@ -128,6 +128,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormFilmes";
             this.Text = "Cine CRUD";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormFilmes_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.listaFilmes)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
