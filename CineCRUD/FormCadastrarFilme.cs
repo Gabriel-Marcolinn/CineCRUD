@@ -46,6 +46,19 @@ namespace CineCRUD
                     {
                         throw new ArgumentException("Atenção!\nOs dados informados de lançamento, ano ou duração são inválidos!");
                     }
+
+                    #region Salva dados
+                        string titulo = inputTitulo.Text.ToString();
+                        string diretor = inputDiretor.Text.ToString();
+                        string genero = inputGenero.Text.ToString();
+                        string stringLancamento = inputLancamento.Text.ToString();
+                        string stringDuracao = inputDuracao.Text.ToString();
+                        string stringAvaliacao = inputAvaliacao.Text.ToString();
+
+                        controle.adicionarFilme(titulo, diretor, genero, stringLancamento, stringDuracao, stringAvaliacao);
+
+                        this.Close();
+                    #endregion
                 }
                 catch (FormatException)
                 {
@@ -55,28 +68,11 @@ namespace CineCRUD
                 {
                     MessageBox.Show(ex.Message);
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocorreu um erro inesperado: " + ex.Message);
+                }
             }
-            #endregion
-
-            #region Salva dados
-            try
-            {
-                string titulo = inputTitulo.Text.ToString();
-                string diretor = inputDiretor.Text.ToString();
-                string genero = inputGenero.Text.ToString();
-                string lancamento = inputLancamento.Text.ToString();
-                string duracao = inputDuracao.Text.ToString();
-                string avaliacao = inputAvaliacao.Text.ToString();
-
-                controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
-                this.Close();
-            }
-            catch(Exception e1)
-            {
-                MessageBox.Show(e1.Message);
-            }
-            
-
             #endregion
         }
 

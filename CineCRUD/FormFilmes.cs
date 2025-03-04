@@ -14,6 +14,7 @@ namespace CineCRUD
     {
         #region Variáveis privadas
         private XMLController controle = new XMLController();
+        private bool bAlterado;
         #endregion
 
         public FormFilmes()
@@ -28,6 +29,11 @@ namespace CineCRUD
             {
                 DataTable listaDados = controle.CarregarXML(abreArqDialog.FileName);
                 listaFilmes.DataSource = listaDados;
+
+                if (controle.GetDataTable().Rows.Count > 0)
+                {
+                    bAlterado = true;
+                }
             }
         }
 
@@ -39,11 +45,11 @@ namespace CineCRUD
             // Atualiza a lista após fechar o cadastro
             listaFilmes.DataSource = null;
             listaFilmes.DataSource = controle.GetDataTable();
-        }
 
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            if (controle.GetDataTable().Rows.Count > 0)
+            {
+                bAlterado = true;
+            }
         }
 
         private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,6 +61,17 @@ namespace CineCRUD
                     controle.salvarXML(salvaArquivoDialog.FileName);
                 }
             }
+        }
+
+        private void listaFilmes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            bAlterado = true;
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
         }
     }
 }

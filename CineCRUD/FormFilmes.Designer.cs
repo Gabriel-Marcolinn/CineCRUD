@@ -54,6 +54,7 @@
             this.listaFilmes.ShowEditingIcon = false;
             this.listaFilmes.Size = new System.Drawing.Size(800, 387);
             this.listaFilmes.TabIndex = 0;
+            this.listaFilmes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.listaFilmes_CellValueChanged);
             // 
             // menuStrip1
             // 
