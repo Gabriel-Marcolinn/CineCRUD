@@ -19,6 +19,7 @@ namespace CineCRUD
         {
             return dtDados;
         }
+        
         public XMLController() {
             InicializarDataTable();
         }
@@ -40,7 +41,7 @@ namespace CineCRUD
             {
                 if (string.IsNullOrEmpty(arqXML) || !System.IO.File.Exists(arqXML))
                 {
-                    MessageBox.Show("O arquivo XML não foi encontrado ou está vazio.");
+                    MessageBox.Show("O arquivo XML não foi encontrado ou está vazio.", "Atenção", MessageBoxButtons.OK,MessageBoxIcon.Error);
                     return null;
                 }
 
@@ -52,7 +53,7 @@ namespace CineCRUD
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar XML: " + ex.Message);
+                MessageBox.Show("Erro ao carregar XML: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -82,7 +83,7 @@ namespace CineCRUD
             {
                 if (dtDados == null || dtDados.Rows.Count == 0)
                 {
-                    MessageBox.Show("Nenhum dado para salvar", "Atenção!", MessageBoxButtons.OK);
+                    MessageBox.Show("Nenhum dado para salvar", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -110,7 +111,7 @@ namespace CineCRUD
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar XML: " + ex.Message);
+                MessageBox.Show("Erro ao salvar XML: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

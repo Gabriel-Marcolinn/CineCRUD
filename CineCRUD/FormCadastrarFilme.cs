@@ -32,7 +32,7 @@ namespace CineCRUD
             #region Validações
             if (inputTitulo.Text.ToString() == "" || inputDiretor.Text.ToString() == "" || inputGenero.Text.ToString() == "" || inputLancamento.Text.ToString() == "" || inputDuracao.Text.ToString() == "" || inputAvaliacao.Text.ToString() == "")
             {
-                MessageBox.Show("Atenção!\nÉ necessário preencher todos os campos para poder cadastrar um novo filme!");
+                MessageBox.Show("É necessário preencher todos os campos para poder cadastrar um novo filme!", "Atenção", MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace CineCRUD
 
                     if ((lancamento < 1900 || lancamento > DateTime.Now.Year) || (duracao <= 0 || duracao > 10000) || (avaliacao < 1 || avaliacao > 10))
                     {
-                        throw new ArgumentException("Atenção!\nOs dados informados de lançamento, ano ou duração são inválidos!");
+                        throw new ArgumentException("Os dados informados de lançamento, ano ou duração são inválidos!");
                     }
 
                     #region Salva dados
@@ -62,7 +62,7 @@ namespace CineCRUD
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Atenção! Insira números válido.");
+                    MessageBox.Show("Insira números válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 catch (ArgumentException ex)
                 {
@@ -70,7 +70,7 @@ namespace CineCRUD
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu um erro inesperado: " + ex.Message);
+                    MessageBox.Show("Ocorreu um erro inesperado: " + ex.Message, "Atenção", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
             #endregion
