@@ -15,6 +15,7 @@ namespace CineCRUD
         #region Variáveis privadas
         private XMLController controle = new XMLController();
         private bool bAlterado = false;
+        private string sCaminhoArquivo = "";
         #endregion
 
         public FormFilmes()
@@ -29,6 +30,8 @@ namespace CineCRUD
             {
                 DataTable listaDados = controle.CarregarXML(abreArqDialog.FileName);
                 listaFilmes.DataSource = listaDados;
+
+                sCaminhoArquivo = abreArqDialog.FileName.ToString();
             }
         }
 
@@ -54,10 +57,12 @@ namespace CineCRUD
 
         private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+            if (controle.GetDataTable().Rows.Count == 0)
             {
-                controle.salvarXML(salvaArquivoDialog.FileName);
+                MessageBox.Show("Não há dados para salvar.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
             }
+            sCaminhoArquivo = comoSalvar(sCaminhoArquivo.ToString());
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,6 +87,20 @@ namespace CineCRUD
                     e.Cancel = true;
                 }
             }
+        }
+    
+        //Função própria que valida se o arquivo já existe (foi carregado) ou se precisa do salvaArquivoDialog, para criar um novo
+        private string comoSalvar(string sCaminhoArquivo)
+        {
+            if (sCaminhoArquivo == "")
+            {
+                if (salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+                {
+                    sCaminhoArquivo = salvaArquivoDialog.FileName;
+                }
+            }
+            controle.salvarXML(sCaminhoArquivo);
+            return sCaminhoArquivo;
         }
     }
 }
