@@ -45,6 +45,8 @@
             // listaFilmes
             // 
             this.listaFilmes.AllowUserToAddRows = false;
+            this.listaFilmes.AllowUserToDeleteRows = false;
+            this.listaFilmes.AllowUserToResizeRows = false;
             this.listaFilmes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.listaFilmes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.listaFilmes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
