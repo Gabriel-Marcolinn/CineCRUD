@@ -124,5 +124,23 @@ namespace CineCRUD
                 MessageBox.Show($"Erro ao salvar XML: {ex.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public bool validaCampos()
+        {
+            foreach (DataRow row in dtDados.Rows)
+            {
+                if (string.IsNullOrWhiteSpace(row["Titulo"]?.ToString()) ||
+                    string.IsNullOrWhiteSpace(row["Diretor"]?.ToString()) ||
+                    string.IsNullOrWhiteSpace(row["Genero"]?.ToString()) ||
+                    string.IsNullOrWhiteSpace(row["Lancamento"]?.ToString()) ||
+                    string.IsNullOrWhiteSpace(row["Duracao"]?.ToString()) ||
+                    string.IsNullOrWhiteSpace(row["Avaliacao"]?.ToString()))
+                {
+                    MessageBox.Show("Existem um ou mais campos obrigatórios em branco!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

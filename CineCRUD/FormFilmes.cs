@@ -15,6 +15,7 @@ namespace CineCRUD
         #region Variáveis privadas
         private XMLController controle = new XMLController();
         private bool bAlterado = false;
+        private bool bSalvo;
         private string sCaminhoArquivo = "";
         #endregion
 
@@ -61,7 +62,7 @@ namespace CineCRUD
                 MessageBox.Show("Não há dados para salvar.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
-            sCaminhoArquivo = comoSalvar(sCaminhoArquivo.ToString());
+            sCaminhoArquivo = Salvar(sCaminhoArquivo.ToString());
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,7 +77,12 @@ namespace CineCRUD
                 DialogResult resposta = MessageBox.Show("O Arquivo foi alterado. Deseja salvar as alterações feitas?", "Atenção", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (resposta == DialogResult.Yes)
                 {
-                    comoSalvar(sCaminhoArquivo);
+                    Salvar(sCaminhoArquivo);
+                    if (bSalvo == false)
+                    {
+                        e.Cancel = true;
+                    }
+
                 }
                 else if (resposta == DialogResult.Cancel)
                 {
@@ -86,15 +92,19 @@ namespace CineCRUD
         }
     
         //Função própria que valida se o arquivo já existe (foi carregado) ou se precisa do salvaArquivoDialog, para criar um novo
-        private string comoSalvar(string sCaminhoArquivo)
+        private string Salvar(string sCaminhoArquivo)
         {
-            if (sCaminhoArquivo == "" && salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+            bSalvo = false;
+            if (controle.validaCampos())
             {
-                sCaminhoArquivo = salvaArquivoDialog.FileName;
+                if (sCaminhoArquivo == "" && salvaArquivoDialog.ShowDialog() == DialogResult.OK)
+                {
+                    sCaminhoArquivo = salvaArquivoDialog.FileName;
+                }
+                controle.salvarXML(sCaminhoArquivo);
+                bAlterado = false;
+                bSalvo = true;
             }
-            controle.salvarXML(sCaminhoArquivo);
-            bAlterado = false;
-
             return sCaminhoArquivo;
         }
     }
