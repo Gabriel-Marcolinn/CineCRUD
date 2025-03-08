@@ -218,6 +218,7 @@
             this.MinimizeBox = false;
             this.Name = "FormCadastrarFilme";
             this.Text = "Cadastrar novo Filme";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCadastrarFilme_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

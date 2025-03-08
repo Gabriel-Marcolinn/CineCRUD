@@ -139,8 +139,53 @@ namespace CineCRUD
                     MessageBox.Show("Existem um ou mais campos obrigatórios em branco!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
+
+                try
+                {
+                    int lancamento = Convert.ToInt32(row["Lancamento"]);
+                    int duracao = Convert.ToInt32(row["Duracao"]);
+                    int avaliacao = Convert.ToInt32(row["Avaliacao"]);
+
+                    if (lancamento < 1895 || lancamento > DateTime.Now.Year)
+                    {
+                        throw new ArgumentException("O ano informado é inválido!");
+                    }
+                    if (duracao <= 0 || duracao > 51420)
+                    {
+                        throw new ArgumentException("A duração em minutos informada é inválida!");
+                    }
+                    if (avaliacao < 1 || avaliacao > 10)
+                    {
+                        throw new ArgumentException("A Avaliação informada é inválida!");
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Insira números válidos nos campos de Lançamento, Duração e Avaliação.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message, "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocorreu um erro inesperado: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            if (dtDados != null)
+            {
+                dtDados.Clear();
+                dtDados.Dispose();
+                dtDados = null;
+            }
         }
     }
 }

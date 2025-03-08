@@ -14,6 +14,7 @@ namespace CineCRUD
     {
         #region Variáveis privadas
         private XMLController controle;
+        private XMLController tempControle;
         #endregion
 
         public FormCadastrarFilme(XMLController controle)
@@ -29,59 +30,28 @@ namespace CineCRUD
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            #region Validações
-            if (inputTitulo.Text.ToString() == "" || inputDiretor.Text.ToString() == "" || inputGenero.Text.ToString() == "" || inputLancamento.Text.ToString() == "" || inputDuracao.Text.ToString() == "" || inputAvaliacao.Text.ToString() == "")
-            {
-                MessageBox.Show("É necessário preencher todos os campos para poder cadastrar um novo filme!", "Atenção", MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            }
-            else
-            {
-                try
-                {
-                    int lancamento = Convert.ToInt32(inputLancamento.Text);
-                    int duracao = Convert.ToInt32(inputDuracao.Text);
-                    int avaliacao = Convert.ToInt32(inputAvaliacao.Text);
-
-                    if (lancamento < 1895 || lancamento > DateTime.Now.Year)
-                    {
-                        throw new ArgumentException("O ano informado é inválido!");
-                    }
-                    if (duracao <= 0 || duracao > 51420)
-                    {
-                        throw new ArgumentException("A duração em minutos informada é inválida!");
-                    }
-                    if (avaliacao < 1 || avaliacao > 10)
-                    {
-                        throw new ArgumentException("A Avaliação informada é inválida!");
-                    }
-
-                    #region Salva dados
-                        string titulo = inputTitulo.Text.ToString();
-                        string diretor = inputDiretor.Text.ToString();
-                        string genero = inputGenero.Text.ToString();
-                        string stringLancamento = inputLancamento.Text.ToString();
-                        string stringDuracao = inputDuracao.Text.ToString();
-                        string stringAvaliacao = inputAvaliacao.Text.ToString();
-
-                        controle.adicionarFilme(titulo, diretor, genero, stringLancamento, stringDuracao, stringAvaliacao);
-
-                        this.Close();
-                    #endregion
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Insira números válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show(ex.Message, "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ocorreu um erro inesperado: " + ex.Message, "Atenção", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
-            }
+            #region Variáveis
+            string titulo = inputTitulo.Text.ToString();
+            string diretor = inputDiretor.Text.ToString();
+            string genero = inputGenero.Text.ToString();
+            string stringLancamento = inputLancamento.Text.ToString();
+            string stringDuracao = inputDuracao.Text.ToString();
+            string stringAvaliacao = inputAvaliacao.Text.ToString();
             #endregion
+
+            tempControle = new XMLController();
+            tempControle.adicionarFilme(titulo,diretor,genero,stringLancamento,stringDuracao,stringAvaliacao);
+            if (tempControle.validaCampos())
+            {
+                controle.adicionarFilme(titulo, diretor, genero, stringLancamento, stringDuracao, stringAvaliacao);
+                this.Close();
+            }
+        }
+
+        private void FormCadastrarFilme_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tempControle?.Dispose();
+            tempControle = null;
         }
 
         #region Impedindo o usuário de digitar letras nos textboxes de números
@@ -108,6 +78,6 @@ namespace CineCRUD
                 e.Handled = true;
             }
         }
-        #endregion
+        #endregion 
     }
 }
