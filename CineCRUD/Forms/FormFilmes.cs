@@ -32,6 +32,7 @@ namespace CineCRUD
                 DataTable listaDados = controle.CarregarXML(abreArqDialog.FileName);
                 listaFilmes.DataSource = listaDados;
 
+                bAlterado = false;
                 sCaminhoArquivo = abreArqDialog.FileName;
             }
         }
