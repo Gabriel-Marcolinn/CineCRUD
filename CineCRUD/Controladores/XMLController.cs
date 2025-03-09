@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -144,7 +145,9 @@ namespace CineCRUD
                 {
                     int lancamento = Convert.ToInt32(row["Lancamento"]);
                     int duracao = Convert.ToInt32(row["Duracao"]);
-                    int avaliacao = Convert.ToInt32(row["Avaliacao"]);
+
+                    string avaliacaoString = row["Avaliacao"].ToString().Replace(",", ".");
+                    double avaliacao = Convert.ToDouble(avaliacaoString);
 
                     if (lancamento < 1895 || lancamento > DateTime.Now.Year)
                     {
@@ -154,7 +157,7 @@ namespace CineCRUD
                     {
                         throw new ArgumentException("A duração em minutos informada é inválida!");
                     }
-                    if (avaliacao < 1 || avaliacao > 10)
+                    if (avaliacao < 1.0 || avaliacao > 10.0)
                     {
                         throw new ArgumentException("A Avaliação informada é inválida!");
                     }

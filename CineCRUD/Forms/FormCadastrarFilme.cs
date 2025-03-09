@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,7 +56,7 @@ namespace CineCRUD
             tempControle = null;
         }
 
-        #region Impedindo o usuário de digitar letras nos textboxes de números
+        #region Validações de digitação do usuário nos campos de entrada
         private void inputDuracao_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
@@ -71,13 +73,14 @@ namespace CineCRUD
             }
         }
 
-        private void inputAvaliacao_KeyPress(object sender, KeyPressEventArgs e)
+        //Validação feita para poder usar o numericUpDown com uma casa decimal, sem problema se o usuário usar vírgula ao invés de ponto na digitação
+        private void inputAvaliacao_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (e.KeyChar == ',')
             {
-                e.Handled = true;
+                e.KeyChar = '.';
             }
         }
-        #endregion 
+        #endregion
     }
 }

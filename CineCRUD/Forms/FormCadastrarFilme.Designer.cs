@@ -1,4 +1,6 @@
-﻿namespace CineCRUD
+﻿using System.Globalization;
+
+namespace CineCRUD
 {
     partial class FormCadastrarFilme
     {
@@ -41,9 +43,10 @@
             this.inputGenero = new System.Windows.Forms.TextBox();
             this.inputLancamento = new System.Windows.Forms.TextBox();
             this.inputDuracao = new System.Windows.Forms.TextBox();
-            this.inputAvaliacao = new System.Windows.Forms.TextBox();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.inputAvaliacao = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.inputAvaliacao)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -158,15 +161,6 @@
             this.inputDuracao.TabIndex = 11;
             this.inputDuracao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputDuracao_KeyPress);
             // 
-            // inputAvaliacao
-            // 
-            this.inputAvaliacao.Location = new System.Drawing.Point(216, 314);
-            this.inputAvaliacao.MaxLength = 2;
-            this.inputAvaliacao.Name = "inputAvaliacao";
-            this.inputAvaliacao.Size = new System.Drawing.Size(100, 20);
-            this.inputAvaliacao.TabIndex = 12;
-            this.inputAvaliacao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputAvaliacao_KeyPress);
-            // 
             // btnSalvar
             // 
             this.btnSalvar.BackColor = System.Drawing.Color.Lime;
@@ -193,14 +187,38 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // inputAvaliacao
+            // 
+            this.inputAvaliacao.DecimalPlaces = 1;
+            this.inputAvaliacao.Location = new System.Drawing.Point(216, 317);
+            this.inputAvaliacao.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.inputAvaliacao.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.inputAvaliacao.Name = "inputAvaliacao";
+            this.inputAvaliacao.Size = new System.Drawing.Size(100, 20);
+            this.inputAvaliacao.TabIndex = 15;
+            this.inputAvaliacao.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.inputAvaliacao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputAvaliacao_KeyPress_1);
+            // 
             // FormCadastrarFilme
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.inputAvaliacao);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
-            this.Controls.Add(this.inputAvaliacao);
             this.Controls.Add(this.inputDuracao);
             this.Controls.Add(this.inputLancamento);
             this.Controls.Add(this.inputGenero);
@@ -219,6 +237,7 @@
             this.Name = "FormCadastrarFilme";
             this.Text = "Cadastrar novo Filme";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCadastrarFilme_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.inputAvaliacao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,8 +257,8 @@
         private System.Windows.Forms.TextBox inputGenero;
         private System.Windows.Forms.TextBox inputLancamento;
         private System.Windows.Forms.TextBox inputDuracao;
-        private System.Windows.Forms.TextBox inputAvaliacao;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.NumericUpDown inputAvaliacao;
     }
 }
