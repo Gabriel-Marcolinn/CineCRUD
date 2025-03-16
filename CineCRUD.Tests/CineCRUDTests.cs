@@ -72,28 +72,78 @@ namespace CineCRUD.Tests
         }
 
         [TestMethod]
-        public void validaCamposDeveRetornarFalsoSeOAnoForInvalido()
+        public void validaCamposDeveRetornarFalsoSeAnoForInvalido()
         {
-            //Ano maior que o atual
             XMLController controle = new XMLController();
             string titulo = "Filme Teste";
             string diretor = "Diretor teste";
             string genero = "Suspense";
-            string lancamento = DateTime.Now.Year+1.ToString();
             string duracao = "180";
             string avaliacao = "5";
-            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
-
             string mensagemErro;
+
+            //Ano maior que o atual
+            string lancamento = DateTime.Now.Year + 1.ToString();
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
             Assert.IsFalse(controle.validaCampos(out mensagemErro));
             Assert.AreEqual("O ano informado é inválido!", mensagemErro);
 
             //Ano anterior ao lançamento do primeiro filme do mundo
-            string lancamento2 = "1850";
-            controle.adicionarFilme(titulo, diretor, genero, lancamento2, duracao, avaliacao);
-
+            lancamento = "1850";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
             Assert.IsFalse(controle.validaCampos(out mensagemErro));
             Assert.AreEqual("O ano informado é inválido!", mensagemErro);
         }
+
+        [TestMethod]
+        public void validaCamposDeveRetornarFalsoSeDuracaoForInvalida()
+        {
+            XMLController controle = new XMLController();
+
+            string titulo = "Filme Teste";
+            string diretor = "Diretor teste";
+            string genero = "Suspense";
+            string lancamento = "2025";
+            string avaliacao = "5";
+            string mensagemErro;
+
+            //Duração zero
+            string duracao = "0";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("A duração em minutos informada é inválida!", mensagemErro);
+
+            //Duração maior que 51420 minutos, tempo do maior filme do mundo
+            duracao = "51421";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("A duração em minutos informada é inválida!", mensagemErro);
+        }
+
+        public void validaCamposDeveRetornarFalsoSeAvaliacaoForInvalida()
+        {
+            XMLController controle = new XMLController();
+
+            
+            string titulo = "Filme Teste";
+            string diretor = "Diretor teste";
+            string genero = "Suspense";
+            string lancamento = "2025";
+            string duracao = "180";
+            string mensagemErro;
+
+            //Avaliacao 0
+            string avaliacao = "0";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("A Avaliação informada é inválida!", mensagemErro);
+
+            //Avaliacao > 10
+            avaliacao = "10.1";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("A Avaliação informada é inválida!", mensagemErro);
+        }
+
     }
 }
