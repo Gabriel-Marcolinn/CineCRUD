@@ -91,12 +91,17 @@ namespace CineCRUD
                 }
             }
         }
-    
+
         //Função própria que valida se o arquivo já existe (foi carregado) ou se precisa do salvaArquivoDialog, para criar um novo
         private string Salvar(string sCaminhoArquivo)
         {
             bSalvo = false;
-            if (controle.validaCampos())
+            string mensagemErro;
+            if (!controle.validaCampos(out mensagemErro))
+            {
+                MessageBox.Show(mensagemErro, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
             {
                 if (sCaminhoArquivo == "" && salvaArquivoDialog.ShowDialog() == DialogResult.OK)
                 {

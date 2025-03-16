@@ -66,7 +66,9 @@ namespace CineCRUD.Tests
             string avaliacao = "5";
             controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
 
-            Assert.IsFalse(controle.validaCampos());
+            string mensagemErro;
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("Existem um ou mais campos obrigatórios em branco!", mensagemErro);
         }
 
         [TestMethod]
@@ -81,14 +83,17 @@ namespace CineCRUD.Tests
             string duracao = "180";
             string avaliacao = "5";
             controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
-            
-            Assert.IsFalse(controle.validaCampos());
+
+            string mensagemErro;
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("O ano informado é inválido!", mensagemErro);
 
             //Ano anterior ao lançamento do primeiro filme do mundo
             string lancamento2 = "1850";
             controle.adicionarFilme(titulo, diretor, genero, lancamento2, duracao, avaliacao);
 
-            Assert.IsFalse(controle.validaCampos());
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("O ano informado é inválido!", mensagemErro);
         }
     }
 }

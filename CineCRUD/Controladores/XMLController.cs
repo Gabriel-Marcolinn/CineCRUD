@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -126,8 +127,9 @@ namespace CineCRUD
             }
         }
 
-        public bool validaCampos()
+        public bool validaCampos(out string mensagemErro)
         {
+            mensagemErro = "";
             foreach (DataRow row in dtDados.Rows)
             {
                 if (string.IsNullOrWhiteSpace(row["Titulo"]?.ToString()) ||
@@ -137,7 +139,7 @@ namespace CineCRUD
                     string.IsNullOrWhiteSpace(row["Duracao"]?.ToString()) ||
                     string.IsNullOrWhiteSpace(row["Avaliacao"]?.ToString()))
                 {
-                    MessageBox.Show("Existem um ou mais campos obrigatórios em branco!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mensagemErro ="Existem um ou mais campos obrigatórios em branco!";
                     return false;
                 }
 
@@ -164,17 +166,17 @@ namespace CineCRUD
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Insira números válidos nos campos de Lançamento, Duração e Avaliação.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    mensagemErro = "Insira números válidos nos campos de Lançamento, Duração e Avaliação.";
                     return false;
                 }
                 catch (ArgumentException ex)
                 {
-                    MessageBox.Show(ex.Message, "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    mensagemErro = ex.Message;
                     return false;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu um erro inesperado: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mensagemErro = "Ocorreu um erro inesperado: " + ex.Message;
                     return false;
                 }
             }

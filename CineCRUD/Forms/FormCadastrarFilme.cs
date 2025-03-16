@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -43,7 +44,14 @@ namespace CineCRUD
 
             tempControle = new XMLController();
             tempControle.adicionarFilme(titulo,diretor,genero,stringLancamento,stringDuracao,stringAvaliacao);
-            if (tempControle.validaCampos())
+
+            string mensagemErro;
+            if (!tempControle.validaCampos(out mensagemErro))
+            {
+                MessageBox.Show(mensagemErro, "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
             {
                 controle.adicionarFilme(titulo, diretor, genero, stringLancamento, stringDuracao, stringAvaliacao);
                 this.Close();
