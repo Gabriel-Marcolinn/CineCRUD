@@ -169,5 +169,42 @@ namespace CineCRUD.Tests
             controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
             Assert.IsTrue(controle.validaCampos(out mensagemErro));
         }
+
+        [TestMethod]
+        public void validaCamposDeveDarErroAoConverterLetrasParaNumeros()
+        {
+            XMLController controle = new XMLController();
+
+
+            string titulo = "Filme Teste";
+            string diretor = "Diretor teste";
+            string genero = "Suspense";
+            string lancamento = "2025";
+            string duracao = "180";
+            string mensagemErro;
+
+            //Campo numérico com letra
+            string avaliacao = "a";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsFalse(controle.validaCampos(out mensagemErro));
+            Assert.AreEqual("Insira números válidos nos campos de Lançamento, Duração e Avaliação.", mensagemErro);
+        }
+
+        [TestMethod]
+        public void funcaoDisposeDeveDeixarODataTableNulo()
+        {
+            XMLController controle = new XMLController();
+
+            string titulo = "Filme Teste";
+            string diretor = "Diretor teste";
+            string genero = "Suspense";
+            string lancamento = "2025";
+            string duracao = "180";
+            string avaliacao = "10";
+
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            controle.Dispose();
+            Assert.IsNull(controle.GetDataTable());
+        }
     }
 }
