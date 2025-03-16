@@ -28,3 +28,6 @@ obj/
 # User-specific files
 *.userosscache
 *.sln.docstates
+
+packages/
+TestResults/
