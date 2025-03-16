@@ -120,6 +120,7 @@ namespace CineCRUD.Tests
             Assert.AreEqual("A duração em minutos informada é inválida!", mensagemErro);
         }
 
+        [TestMethod]
         public void validaCamposDeveRetornarFalsoSeAvaliacaoForInvalida()
         {
             XMLController controle = new XMLController();
@@ -145,5 +146,28 @@ namespace CineCRUD.Tests
             Assert.AreEqual("A Avaliação informada é inválida!", mensagemErro);
         }
 
+        [TestMethod]
+        public void validaCamposDeveRetornarVerdadeoiroSeAvaliacaoTiverPontoOuVirgulaDeSeparador()
+        {
+            XMLController controle = new XMLController();
+
+
+            string titulo = "Filme Teste";
+            string diretor = "Diretor teste";
+            string genero = "Suspense";
+            string lancamento = "2025";
+            string duracao = "180";
+            string mensagemErro;
+
+            //Avaliacao com virgula
+            string avaliacao = "5,5";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsTrue(controle.validaCampos(out mensagemErro));
+
+            //Avaliacao com Ponto
+            avaliacao = "5.5";
+            controle.adicionarFilme(titulo, diretor, genero, lancamento, duracao, avaliacao);
+            Assert.IsTrue(controle.validaCampos(out mensagemErro));
+        }
     }
 }
