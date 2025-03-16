@@ -5,7 +5,7 @@ using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace CineCRUD.Tests
+namespace CineCRUD.Tests.Testes
 {
     [TestClass]
     public class CineCRUDUnitTests
