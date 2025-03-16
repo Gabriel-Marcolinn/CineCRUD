@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace CineCRUD.Tests
 {
     [TestClass]
-    public class CineCRUDTests
+    public class CineCRUDUnitTests
     {
         [TestMethod]
         public void inicializarDataTableDeveCriarColunasCorretamente()
